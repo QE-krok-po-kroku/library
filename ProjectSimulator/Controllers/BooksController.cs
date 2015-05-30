@@ -13,7 +13,7 @@ namespace ProjectSimulator.Controllers
     public class BooksController : ApiController
     {
         readonly BookDao _dao = new BookDao();
-        List<string> listOfBooks = new List<string> { "new", "good", "bad", "very_bad" };
+        List<string> listOfBooks = new List<string> { "NEW", "GOOD", "BAD", "VERY_BAD" };
 
         [Route("")]
         [HttpGet]
@@ -32,7 +32,7 @@ namespace ProjectSimulator.Controllers
             var counter = 0;
             foreach(var book in books)
             {
-                if (book.State != "very_bad" && listOfBooks.IndexOf(book.State) >= 0 && !IsbnInDB(book.Isbn))
+                if (book.State != "VERY_BAD" && listOfBooks.IndexOf(book.State) >= 0 && !IsbnInDB(book.Isbn))
                 {
                     counter++;
                     _dao.AddBook(book);

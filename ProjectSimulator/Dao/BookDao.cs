@@ -18,7 +18,7 @@ namespace ProjectSimulator.Dao
 
             foreach (var book in this.GetBooks())
             {
-                if (book.State != "very_bad")
+                if (book.State != "VERY_BAD")
                     arr.Add(book);
             }
 
