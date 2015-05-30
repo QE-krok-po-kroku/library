@@ -29,13 +29,17 @@ namespace ProjectSimulator.Controllers
         [HttpPost]
        public HttpResponseMessage Post([FromBody] IEnumerable<Book> books)
         {
+            var counter = 0;
             foreach(var book in books)
             {
                 if (book.State != "very_bad" && listOfBooks.IndexOf(book.State) >= 0 && !IsbnInDB(book.Isbn))
                 {
+                    counter++;
                     _dao.AddBook(book);
                 }
             }
+            if (counter == 0)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Nic sie nie dodalo");
             return Request.CreateResponse(HttpStatusCode.Created, _dao.GetBooks().Count());
         }
 
