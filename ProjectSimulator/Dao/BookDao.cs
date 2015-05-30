@@ -12,6 +12,19 @@ namespace ProjectSimulator.Dao
             return _db.Books;
         }
 
+        public IEnumerable<Book> GetBooksNotVeryBad()
+        {
+            List<Book> arr = new List<Book>();
+
+            foreach (var book in this.GetBooks())
+            {
+                if (book.State != "very_bad")
+                    arr.Add(book);
+            }
+
+            return arr;
+        }
+
         public void AddBook(Book book)
         {
             _db.Books.Add(book);

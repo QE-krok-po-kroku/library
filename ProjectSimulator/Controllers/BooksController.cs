@@ -21,7 +21,7 @@ namespace ProjectSimulator.Controllers
         {
             //TODO: Sprint 2
 
-            return _dao.GetBooks();
+            return _dao.GetBooksNotVeryBad();
         }
 
 //TODO: Sprint 1
