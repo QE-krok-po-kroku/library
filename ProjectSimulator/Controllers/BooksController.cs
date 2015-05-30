@@ -13,22 +13,30 @@ namespace ProjectSimulator.Controllers
     public class BooksController : ApiController
     {
         readonly BookDao _dao = new BookDao();
+        List<string> listOfBooks = new List<string> { "new", "good", "bad", "very_bad" };
 
         [Route("")]
         [HttpGet]
         public IEnumerable<Book> GetBooks()
         {
             //TODO: Sprint 2
-            return new List<Book>();
+
+            return _dao.GetBooks();
         }
 
 //TODO: Sprint 1
         [Route("")]
         [HttpPost]
-       public HttpResponseMessage Post([FromBody] Book book)
+       public HttpResponseMessage Post([FromBody] IEnumerable<Book> books)
         {
-            _dao.AddBook(book);
-            return Request.CreateResponse(HttpStatusCode.Created, _dao.GetBooks());
+            foreach(var book in books)
+            {
+                if (book.State != "very bad" && listOfBooks.IndexOf(book.State) >= 0)
+                {
+                    _dao.AddBook(book);
+                }
+            }
+            return Request.CreateResponse(HttpStatusCode.Created, _dao.GetBooks().Count());
         }
     }
 }
