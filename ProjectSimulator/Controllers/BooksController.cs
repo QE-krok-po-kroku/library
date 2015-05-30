@@ -23,11 +23,12 @@ namespace ProjectSimulator.Controllers
         }
 
 //TODO: Sprint 1
-//        [Route("")]
-//        [HttpPost]
-//        public HttpResponseMessage Post([FromBody] /* type variable */)
-//        {
-//            return Request.CreateResponse(HttpStatusCode.Created, new Count() { BooksCount = 0});
-//        }
+        [Route("")]
+        [HttpPost]
+       public HttpResponseMessage Post([FromBody] Book book)
+        {
+            _dao.AddBook(book);
+            return Request.CreateResponse(HttpStatusCode.Created, _dao.GetBooks());
+        }
     }
 }
