@@ -6,7 +6,7 @@ namespace ProjectSimulator.Dao
 {
     class BookDao
     {
-        public static IList<string> ValidStatuses = new List<string>() { "NEW", "GOOD", "BAD" };
+        public static IList<string> ValidStatuses = new List<string>() { "NEW", "GOOD" };
 
         readonly ApplicationDbContext _db = new ApplicationDbContext();
 
