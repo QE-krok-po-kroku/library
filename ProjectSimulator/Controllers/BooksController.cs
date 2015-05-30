@@ -31,12 +31,23 @@ namespace ProjectSimulator.Controllers
         {
             foreach(var book in books)
             {
-                if (book.State != "very_bad" && listOfBooks.IndexOf(book.State) >= 0)
+                if (book.State != "very_bad" && listOfBooks.IndexOf(book.State) >= 0 && !IsbnInDB(book.Isbn))
                 {
                     _dao.AddBook(book);
                 }
             }
             return Request.CreateResponse(HttpStatusCode.Created, _dao.GetBooks().Count());
         }
+
+        public bool IsbnInDB(string isbn)
+        {
+            foreach (var book in _dao.GetBooks())
+            {
+                if (book.Isbn == isbn)
+                    return false;
+            }
+            return true;
+        }
+
     }
 }
