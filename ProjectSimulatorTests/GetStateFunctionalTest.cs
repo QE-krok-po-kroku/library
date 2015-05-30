@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using ProjectSimulator;
 using ProjectSimulator.Models;
+using System.Net.Http;
 
 namespace ProjectSimulatorTests
 {
@@ -43,6 +44,40 @@ namespace ProjectSimulatorTests
             BookDto dto = dtos.First();
             Assert.That(dto.State, Is.EqualTo("good"));
             Assert.That(dto.Isbn, Is.EqualTo("978-0132350884"));
+        }
+
+
+        [Test]
+        public void WebApiPostBookTest()
+        {
+            var book1 = new Book
+            {
+                Author = "Author",
+                Isbn = "2432342623462",
+                State = "GOOD",
+                Title = "Title",
+                Year = 2022
+            };
+
+            var book2 = new Book
+            {
+                Author = "Author 2",
+                Isbn = "2432342623462",
+                State = "VERY BAD",
+                Title = "Title 2",
+                Year = 2022
+            };
+            var books = new List<Book>() { book1, book2 };
+
+            var content = new StringContent(JsonConvert.SerializeObject(books));
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            var response = server.HttpClient.PostAsync("api/library/books", content).Result;
+
+            var result = response.Content.ReadAsStringAsync().Result;
+            var dtos = JsonConvert.DeserializeObject<Count>(result);
+
+            Assert.That(dtos.BooksCount, Is.EqualTo(2));
         }
     }
 }

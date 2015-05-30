@@ -24,23 +24,23 @@ namespace ProjectSimulator.Controllers
             return _dao.GetBooksNotVeryBad();
         }
 
-//TODO: Sprint 1
+        //TODO: Sprint 1
         [Route("")]
         [HttpPost]
-       public HttpResponseMessage Post([FromBody] IEnumerable<Book> books)
+        public HttpResponseMessage Post([FromBody] List<Book> books)
         {
-            var counter = 0;
-            foreach(var book in books)
+            var validBooks = books.Where(IsValid).ToList();
+            foreach (var book in validBooks)
             {
-                if (book.State != "VERY_BAD" && listOfBooks.IndexOf(book.State) >= 0 && IsbnInDB(book.Isbn))
-                {
-                    counter++;
-                    _dao.AddBook(book);
-                }
+                _dao.AddBook(book);
             }
-            if (counter == 0)
+            if (validBooks.Count() == 0)
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Nic sie nie dodalo");
-            return Request.CreateResponse(HttpStatusCode.Created, _dao.GetBooks().Count());
+            var count = _dao.GetBooks().Count();
+            return Request.CreateResponse(HttpStatusCode.Created, new Count
+            {
+                BooksCount =  count
+            });
         }
 
         public bool IsbnInDB(string isbn)
@@ -52,6 +52,9 @@ namespace ProjectSimulator.Controllers
             }
             return true;
         }
-
+        private static bool IsValid(Book book)
+        {
+            return BookDao.ValidStatuses.Any(s => s == book.State);
+        }
     }
 }
