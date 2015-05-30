@@ -53,9 +53,10 @@ namespace ProjectSimulator.Controllers
             }
             return true;
         }
-        private static bool IsValid(Book book)
+        private bool IsValid(Book book)
         {
-            return BookDao.ValidStatuses.Any(s => s == book.State.ToUpper());
+            return BookDao.ValidStatuses.Any(s => s == book.State.ToUpper())
+                && !_dao.BookExists(book);
         }
     }
 }

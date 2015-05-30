@@ -31,6 +31,11 @@ namespace ProjectSimulator.Dao
             _db.Database.Initialize(true);
         }
 
+        public bool BookExists(Book book)
+        {
+            return _db.Books.Any(b => b.Isbn == book.Isbn);
+        }
+
         private bool CanShow(Book book)
         {
             return ValidStatuses.Any(s => s == book.State.ToUpper());

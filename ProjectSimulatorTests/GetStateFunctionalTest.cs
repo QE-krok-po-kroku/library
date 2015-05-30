@@ -67,7 +67,16 @@ namespace ProjectSimulatorTests
                 Title = "Title 2",
                 Year = 2022
             };
-            var books = new List<Book>() { book1, book2 };
+
+            var book3 = new Book
+            {
+                Author = "Author 2",
+                Isbn = "2432342623462",
+                State = "VERY BAD",
+                Title = "Title 2",
+                Year = 2022
+            };
+            var books = new List<Book>() { book1, book2, book3 };
 
             var content = new StringContent(JsonConvert.SerializeObject(books));
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
