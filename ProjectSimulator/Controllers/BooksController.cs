@@ -16,11 +16,11 @@ namespace ProjectSimulator.Controllers
 
         [Route("")]
         [HttpGet]
-        public IEnumerable<Book> GetBooks()
+        public IEnumerable<BookDetailsDto> GetBooks()
         {
             //TODO: Sprint 2
 
-            return _dao.GetBooksForDisplay();
+            return _dao.GetBooksForDisplay().Select(b => new BookDetailsDto(b.Isbn, b.Title, b.Author, b.Year, b.State));
         }
 
         //TODO: Sprint 1

@@ -109,6 +109,7 @@
     <Compile Include="Controllers\BooksStateController.cs" />
     <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Dao\BookDao.cs" />
+    <Compile Include="Models\BookDetailsDto.cs" />
     <Compile Include="Models\BookDto.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Book.cs" />

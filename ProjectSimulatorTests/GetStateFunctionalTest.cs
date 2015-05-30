@@ -7,6 +7,7 @@ using NUnit.Framework;
 using ProjectSimulator;
 using ProjectSimulator.Models;
 using System.Net.Http;
+using ProjectSimulator.Dao;
 
 namespace ProjectSimulatorTests
 {
@@ -38,10 +39,10 @@ namespace ProjectSimulatorTests
             var response = server.HttpClient.GetAsync("api/library/books_state").Result;
 
             var result = response.Content.ReadAsStringAsync().Result;
-            var dtos = JsonConvert.DeserializeObject<List<BookDto>>(result);
+            var dtos = JsonConvert.DeserializeObject<List<BookDetailsDto>>(result);
 
             Assert.That(dtos.Count, Is.EqualTo(1));
-            BookDto dto = dtos.First();
+            BookDetailsDto dto = dtos.First();
             Assert.That(dto.State, Is.EqualTo("good"));
             Assert.That(dto.Isbn, Is.EqualTo("978-0132350884"));
         }
