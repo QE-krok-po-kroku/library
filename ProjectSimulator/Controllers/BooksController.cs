@@ -31,7 +31,7 @@ namespace ProjectSimulator.Controllers
         {
             foreach(var book in books)
             {
-                if (book.State != "very bad" && listOfBooks.IndexOf(book.State) >= 0)
+                if (book.State != "very_bad" && listOfBooks.IndexOf(book.State) >= 0)
                 {
                     _dao.AddBook(book);
                 }
