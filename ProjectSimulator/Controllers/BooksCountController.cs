@@ -14,7 +14,10 @@ namespace ProjectSimulator.Controllers
         public Count GetBooksCount()
         {
             //TODO: Sprint 3
-            return new Count() {BooksCount = 0};
+            int counter = 0;
+            foreach (var book in _dao.GetBooksNotVeryBad())
+                counter++;
+            return new Count() { BooksCount = counter };
         }
     }
 }
