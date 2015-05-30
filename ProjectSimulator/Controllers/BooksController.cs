@@ -32,7 +32,7 @@ namespace ProjectSimulator.Controllers
             var counter = 0;
             foreach(var book in books)
             {
-                if (book.State != "VERY_BAD" && listOfBooks.IndexOf(book.State) >= 0 && !IsbnInDB(book.Isbn))
+                if (book.State != "VERY_BAD" && listOfBooks.IndexOf(book.State) >= 0 && IsbnInDB(book.Isbn))
                 {
                     counter++;
                     _dao.AddBook(book);
