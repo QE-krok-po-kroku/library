@@ -79,5 +79,16 @@ namespace ProjectSimulatorTests
 
             Assert.That(dtos.BooksCount, Is.EqualTo(2));
         }
+
+        [Test]
+        public void WebApiGetBooksCountTest()
+        {
+            var response = server.HttpClient.GetAsync("api/library/bookscount").Result;
+
+            var result = response.Content.ReadAsStringAsync().Result;
+            var dtos = JsonConvert.DeserializeObject<Count>(result);
+
+            Assert.That(dtos.BooksCount, Is.EqualTo(1));
+        }
     }
 }

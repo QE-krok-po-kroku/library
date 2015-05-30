@@ -32,6 +32,7 @@ namespace ProjectSimulator.Controllers
             var validBooks = books.Where(IsValid).ToList();
             foreach (var book in validBooks)
             {
+                book.State = book.State.ToUpper();
                 _dao.AddBook(book);
             }
             if (validBooks.Count() == 0)

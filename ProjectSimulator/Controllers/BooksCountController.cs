@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using ProjectSimulator.Dao;
 using ProjectSimulator.Models;
+using System.Linq;
 
 namespace ProjectSimulator.Controllers
 {
@@ -14,10 +15,8 @@ namespace ProjectSimulator.Controllers
         public Count GetBooksCount()
         {
             //TODO: Sprint 3
-            int counter = 0;
-            foreach (var book in _dao.GetBooksForDisplay())
-                counter++;
-            return new Count() { BooksCount = counter };
+            var count = _dao.GetBooksForDisplay().Count();
+            return new Count() { BooksCount = count };
         }
     }
 }
