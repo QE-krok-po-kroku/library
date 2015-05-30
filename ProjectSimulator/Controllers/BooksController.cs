@@ -13,7 +13,6 @@ namespace ProjectSimulator.Controllers
     public class BooksController : ApiController
     {
         readonly BookDao _dao = new BookDao();
-        List<string> listOfBooks = new List<string> { "NEW", "GOOD", "BAD", "VERY_BAD" };
 
         [Route("")]
         [HttpGet]
@@ -44,15 +43,6 @@ namespace ProjectSimulator.Controllers
             });
         }
 
-        public bool IsbnInDB(string isbn)
-        {
-            foreach (var book in _dao.GetBooks())
-            {
-                if (book.Isbn == isbn)
-                    return false;
-            }
-            return true;
-        }
         private bool IsValid(Book book)
         {
             return BookDao.ValidStatuses.Any(s => s == book.State.ToUpper())
