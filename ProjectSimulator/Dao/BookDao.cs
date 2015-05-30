@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ProjectSimulator.Models;
+using System.Linq;
 
 namespace ProjectSimulator.Dao
 {
@@ -14,17 +15,9 @@ namespace ProjectSimulator.Dao
             return _db.Books;
         }
 
-        public IEnumerable<Book> GetBooksNotVeryBad()
+        public IEnumerable<Book> GetBooksForDisplay()
         {
-            List<Book> arr = new List<Book>();
-
-            foreach (var book in this.GetBooks())
-            {
-                if (book.State != "VERY_BAD")
-                    arr.Add(book);
-            }
-
-            return arr;
+            return GetBooks().Where(CanShow);
         }
 
         public void AddBook(Book book)
@@ -36,6 +29,11 @@ namespace ProjectSimulator.Dao
         public void ResetDatabase()
         {
             _db.Database.Initialize(true);
+        }
+
+        private bool CanShow(Book book)
+        {
+            return ValidStatuses.Any(s => s == book.State.ToUpper());
         }
     }
 }

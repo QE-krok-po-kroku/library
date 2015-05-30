@@ -21,7 +21,7 @@ namespace ProjectSimulator.Controllers
         {
             //TODO: Sprint 2
 
-            return _dao.GetBooksNotVeryBad();
+            return _dao.GetBooksForDisplay();
         }
 
         //TODO: Sprint 1
@@ -36,7 +36,7 @@ namespace ProjectSimulator.Controllers
             }
             if (validBooks.Count() == 0)
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Nic sie nie dodalo");
-            var count = _dao.GetBooks().Count();
+            var count = _dao.GetBooksForDisplay().Count();
             return Request.CreateResponse(HttpStatusCode.Created, new Count
             {
                 BooksCount =  count
@@ -54,7 +54,7 @@ namespace ProjectSimulator.Controllers
         }
         private static bool IsValid(Book book)
         {
-            return BookDao.ValidStatuses.Any(s => s == book.State);
+            return BookDao.ValidStatuses.Any(s => s == book.State.ToUpper());
         }
     }
 }
