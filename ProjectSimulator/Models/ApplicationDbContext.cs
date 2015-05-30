@@ -23,7 +23,7 @@ namespace ProjectSimulator.Models
                     Title = "Refactoring: Improving the Design of Existing Code",
                     Author = "Martin Fowler",
                     Year = 1999,
-                    State = "bad"
+                    State = "BAD"
                 },
                 new Book
                 {
@@ -31,7 +31,7 @@ namespace ProjectSimulator.Models
                     Title = "Head First Design Patterns",
                     Author = "Eric Freeman",
                     Year = 2004,
-                    State = "very_bad"
+                    State = "VERY_BAD"
                 }
             };
 
